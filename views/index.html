@@ -1,0 +1,64 @@
+% include('_header.html', title='users') 
+    <div class="mx-8 mt-8 flex justify-center">
+        <form id="frmUser" class="flex flex-row items-center p-2 bg-gradient-to-r from-blue-200 to-blue-400 rounded-md gap-x-4 shadow-lg">
+            <div>
+                <label for="first_name">First Name</label>
+                <input type="text" name="frm_first_name">
+            </div>
+            <div>
+                <label for="first_name">Last Name</label>
+                <input type="text" name="frm_last_name">
+            </div>
+            <button 
+            class="rounded-md border p-1 border-black bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-md"
+            mix-post="/api/users" 
+                mix-data="#frmUser"    
+            >Create user
+            </button>
+        </form>
+    </div>
+    <div class="mx-8 my-8 p-2 bg-gradient-to-r from-blue-200 to-blue-300 flex justify-center rounded-md shadow-md">
+        <div class="bg-gradient-to-r from-blue-300 to-blue-400 w-full rounded-md flex flex-wrap p-4 gap-8 shadow-md">
+            <div id='users' class="grid grid-cols-3 gap-4">
+                % for user in users:
+                <div id="user_{{user['_key']}}" class="bg-gradient-to-r from-gray-200 to-gray-300 rounded-md flex flex-col gap-2 p-6 shadow-md">
+                    <div class="flex w-full justify-between">
+                        <p>ID: {{user['_key']}}</p>
+                        <button mix-delete="/api/users/{{ user['_key'] }}" class="text-xl">
+                            🗑️
+                        </button>
+                    </div>
+                    <form id="edit_user" class="flex flex-col gap-4">
+                        <label for="{{ user['_key'] }}_frm_first_name">
+                          First Name:
+                          <input 
+                            class="border-2 border-blue-300 rounded-md p-1"
+                            name="{{ user['_key'] }}_frm_first_name" 
+                            value="{{ user['first_name'] }}"
+                            type="text"
+                            mix-put="/api/users/first_name/{{ user['_key'] }}"
+                            mix-data="#edit_user"
+                            mix-blur
+                            >
+                        </label>
+                        <label for="{{ user['_key'] }}_frm_last_name">
+                          Last Name:
+                          <input 
+                            class="border-2 border-blue-300 rounded-md p-1"
+                            name="{{ user['_key'] }}_frm_last_name" 
+                            value="{{ user['last_name'] }}" 
+                            type="text" 
+                            mix-put="/api/users/last_name/{{ user['_key'] }}"
+                            mix-data="#edit_user"
+                            mix-blur
+                            >
+                        </label>
+                    </form>
+                  </div>
+                % end
+              </div>
+            </div>
+        </div>
+    </div>
+
+% include('_footer.html')
