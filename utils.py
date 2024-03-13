@@ -47,7 +47,7 @@ def delete_user(key):
 def generate_user_template(user, target, method):
             return f"""
             <template mix-target="{target}" {method}>
-                <div id="user_{str(user['_key'])}" class="bg-gradient-to-r from-gray-300 to-gray-400 rounded-md flex flex-col gap-2 p-6 shadow-md">
+                <div id="user_{str(user['_key'])}" class="bg-gradient-to-r from-gray-200 to-gray-300 rounded-md flex flex-col gap-2 p-6 shadow-md">
                     <div class="flex w-full justify-between">
                        <p>ID: {str(user['_key'])}</p>
                         <button mix-delete="/api/users/{str(user['_key'])}" class="text-xl">
