@@ -50,7 +50,11 @@ def _(key):
         new_first_name = request.forms.get(f"{key}_frm_first_name")
 
         user = utils.update_user(key, 'first_name', new_first_name)
-
+        # return(f"""
+        #     NEW NAME: - - - - - - - - - - - - {new_first_name} - - - - - - - - - - - -\n
+        #     KEY: - - - - - - - - - - - - {key} - - - - - - - - - - - -\n
+        #     USER: - - - - - - - - - - - - {user} - - - - - - - - - - - -
+        # """)
         return utils.generate_user_template(user[0], f'#user_{str(user[0]["_key"])}', "mix-replace")
     except Exception as ex:
         return f"Couldn't edit user!\n {ex}"
@@ -65,7 +69,7 @@ def _(key):
         new_last_name = request.forms.get(f"{key}_frm_last_name")
 
         user = utils.update_user(key, 'last_name', new_last_name)
-
+        print(f'NEW NAME: - - - - - - - - - - - - {new_last_name} - - - - - - - - - - - - ')
         return utils.generate_user_template(user[0], f'#user_{str(user[0]["_key"])}', "mix-replace")
     except Exception as ex:
         return f"Couldn't edit user!\n {ex}"

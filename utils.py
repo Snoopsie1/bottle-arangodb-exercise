@@ -23,7 +23,7 @@ def create_user(first_name, last_name):
 ############################################################
 def get_users():
     query = f"""
-            FOR user in users 
+            FOR user IN users 
             SORT user._key DESC
             RETURN user
         """
@@ -31,7 +31,7 @@ def get_users():
 ############################################################
 def update_user(key, attribute, new_value):
     query = f"""
-        FOR user in users FILTER user._key == '{key}'
+        FOR user IN users FILTER user._key == '{key}'
         UPDATE user WITH {{ {attribute}: '{new_value}' }} IN users
         RETURN NEW
     """
@@ -54,7 +54,7 @@ def generate_user_template(user, target, method):
                            🗑️
                         </button>
                     </div>
-                    <form id="edit_user" class="flex flex-col gap-4">
+                    <form id="edit_user_{str(user['_key'])}" class="flex flex-col gap-4">
                         <label for="{str(user['_key'])}_frm_first_name">
                              First Name:
                              <input 
@@ -63,7 +63,7 @@ def generate_user_template(user, target, method):
                                value="{str(user['first_name'])}"
                                type="text"
                                mix-put="/api/users/first_name/{str(user['_key'])}"
-                               mix-data="#edit_user"
+                               mix-data="#edit_user_{str(user['_key'])}"
                                mix-blur
                                >
                         </label>
@@ -75,7 +75,7 @@ def generate_user_template(user, target, method):
                             value="{str(user['last_name'])}" 
                             type="text" 
                             mix-put="/api/users/last_name/{str(user['_key'])}"
-                            mix-data="#edit_user"
+                            mix-data="#edit_user_{str(user['_key'])}"
                             mix-blur
                             >
                        </label>

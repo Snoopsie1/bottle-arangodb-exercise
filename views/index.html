@@ -28,7 +28,7 @@
                             🗑️
                         </button>
                     </div>
-                    <form id="edit_user" class="flex flex-col gap-4">
+                    <form id="edit_user_{{ user['_key'] }}" class="edit_user flex flex-col gap-4">
                         <label for="{{ user['_key'] }}_frm_first_name">
                           First Name:
                           <input 
@@ -37,7 +37,7 @@
                             value="{{ user['first_name'] }}"
                             type="text"
                             mix-put="/api/users/first_name/{{ user['_key'] }}"
-                            mix-data="#edit_user"
+                            mix-data="#edit_user_{{ user['_key'] }}"
                             mix-blur
                             >
                         </label>
@@ -49,7 +49,7 @@
                             value="{{ user['last_name'] }}" 
                             type="text" 
                             mix-put="/api/users/last_name/{{ user['_key'] }}"
-                            mix-data="#edit_user"
+                            mix-data="#edit_user_{{ user['_key'] }}"
                             mix-blur
                             >
                         </label>
